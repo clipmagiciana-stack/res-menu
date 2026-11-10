@@ -18,7 +18,7 @@ export async function openCameraPreview(source) {
   const status = panel.querySelector('[role="status"]');
   const [closeButton, smaller, reset, larger, place] = panel.querySelectorAll('button');
   for (const button of [smaller, reset, larger, place]) button.style.cssText = 'min-height:44px;min-width:44px;padding:8px;border:0;border-radius:8px;background:white;color:#111;font:inherit';
-  model.setAttribute('src', source.getAttribute('src'));
+  model.setAttribute('src', source.src || source.getAttribute('src'));
   model.setAttribute('alt', source.getAttribute('alt') || '3D dish');
   model.setAttribute('exposure', source.getAttribute('exposure') || '1');
   let stream;
