@@ -114,7 +114,7 @@ function show(i){
 $("previous").addEventListener("click",()=>show(current-1));$("next").addEventListener("click",()=>show(current+1));
 $("add").addEventListener("click",()=>{count++;$("toast").textContent=dishes[current].n+" added · "+count+" in demo cart";$("toast").style.opacity="1";setTimeout(()=>$("toast").style.opacity="0",1900)});
 let startX=null;
-$("stage").addEventListener("pointerdown",e=>{if(e.target.tagName.toLowerCase()==="model-viewer")return;startX=e.clientX});
+$("stage").addEventListener("pointerdown",e=>{startX=e.clientX});
 $("stage").addEventListener("pointerup",e=>{if(startX===null)return;const delta=e.clientX-startX;if(Math.abs(delta)>75)show(current+(delta<0?1:-1));startX=null});
 window.addEventListener("keydown",e=>{if(e.key==="ArrowRight")show(current+1);if(e.key==="ArrowLeft")show(current-1)});
 window.addEventListener("resize",()=>show(current));
