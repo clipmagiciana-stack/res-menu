@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><meta name="theme-color" content="#092e34"/><title>Lagon Island Kitchen · 5D 3D Menu</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#07272c;color:#fdf8ec;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Arial,sans-serif}
+:root{--gold:#e4c489;--ink:#0a3035;--muted:#a9c3c3}
+.app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 62% 48%,#225b5b 0%,#0a343b 46%,#051c26 100%)}
+.app:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#ffffff03,transparent 60%),repeating-linear-gradient(150deg,#ffffff06 0 1px,transparent 1px 76px)}
+header{position:relative;z-index:8;display:flex;align-items:center;justify-content:space-between;padding:26px min(5vw,70px);gap:12px}
+.logo{display:flex;gap:11px;align-items:center}.logo .emblem{width:46px;height:46px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:29px}
+.logo b{display:block;letter-spacing:.25em;font-size:15px}.logo small{display:block;letter-spacing:.2em;color:#aac6c1;font-size:9px;margin-top:3px}.demo{border:1px solid #789992;color:#bdd6cf;border-radius:30px;padding:9px 13px;letter-spacing:.12em;font-size:10px}
+.information{position:absolute;left:6%;top:25%;max-width:335px;z-index:6;pointer-events:none}.overline{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.27em}
+h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(46px,5vw,80px);line-height:1.02;letter-spacing:-.05em;margin:18px 0}h1 em{font-weight:400;color:var(--gold);font-style:italic}
+.desc{color:#c3d8d5;font-size:14px;line-height:1.65;max-width:290px;min-height:68px}.portion{color:#bad4d2;font-size:12px;letter-spacing:.08em;margin-top:12px}.price{font-family:Georgia,serif;color:var(--gold);font-size:34px;margin-top:9px}
+.add{border:0;background:var(--gold);color:#193438;border-radius:50px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;padding:14px 22px;margin-top:18px;pointer-events:auto;cursor:pointer}
+.stage{position:absolute;inset:80px 0 70px;z-index:2;touch-action:none;cursor:grab}.stage.dragging{cursor:grabbing}.stage canvas{display:block;width:100%;height:100%}
+.preview{position:absolute;left:50%;top:35%;transform:translate(-50%,-50%);width:min(36vw,330px);opacity:.48;pointer-events:none}.preview img{width:100%;border-radius:100%;mask-image:radial-gradient(circle,#000 36%,transparent 72%)}.stage.ready .preview{display:none}
+.loading{position:absolute;left:57%;top:72%;transform:translateX(-50%);color:#d9e9e6;font-size:11px;max-width:230px;line-height:1.5;text-align:center}.stage.ready .loading{display:none}
+.pager{position:absolute;z-index:8;left:6%;bottom:10%;display:flex;gap:15px;align-items:center}.nav{background:#ffffff12;color:#fbf3e6;width:47px;height:47px;border:1px solid #adbbbca8;border-radius:100px;font-size:28px;cursor:pointer}.count{color:#cae0de;letter-spacing:.2em;font-size:12px}
+.tutorial{position:absolute;bottom:4%;left:6%;z-index:8;color:#a1c0bc;font-size:10px;letter-spacing:.08em}
+.wheel{position:absolute;right:0;bottom:0;width:250px;height:290px;z-index:9;overflow:hidden;pointer-events:none}
+.orbit{position:absolute;left:106px;top:31px;width:220px;height:220px;border:1px solid #e4c48966;border-radius:50%;box-shadow:0 0 38px #d9bb8720 inset}
+.hub{position:absolute;left:169px;top:115px;border-radius:50%;width:92px;height:92px;background:linear-gradient(145deg,#f0d7a5,#b18e59);color:#14383b;display:grid;place-items:center;text-align:center;line-height:1.3;font-size:10px;letter-spacing:.14em;font-weight:900}
+.dish-button{position:absolute;width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid #bed3c9;background:#1d4a4c;padding:0;pointer-events:auto;cursor:pointer;box-shadow:0 10px 22px #0007;transition:transform .2s,border-color .2s}.dish-button img{width:100%;height:100%;object-fit:cover}.dish-button.active{border:3px solid var(--gold);transform:scale(1.15);box-shadow:0 0 0 5px #e4c4892a,0 12px 25px #0008}
+.cart{position:relative;z-index:8;font-size:12px;color:var(--gold);margin-left:auto}.notification{position:absolute;z-index:15;bottom:90px;left:50%;transform:translateX(-50%);background:var(--gold);color:#102f33;padding:12px 18px;border-radius:30px;opacity:0;transition:opacity .2s;font-size:12px;font-weight:700;pointer-events:none;white-space:nowrap}
+.status{position:absolute;right:5%;top:100px;color:#bfd3cf;font-size:11px;z-index:8}
+@media(min-width:900px){.app{min-height:720px;height:100svh}.stage{left:14%;inset:80px 0 60px 13%}}
+@media(max-width:650px){header{padding:18px 20px}.logo .emblem{width:39px;height:39px;font-size:24px}.logo b{font-size:12px}.logo small{font-size:7px}.demo{font-size:9px;padding:8px}.information{top:14%;left:7%;max-width:85%}h1{font-size:clamp(42px,12vw,59px);margin:10px 0}.desc{font-size:12px;max-width:285px;line-height:1.45;min-height:0}.portion{margin-top:8px}.price{font-size:27px;margin-top:5px}.add{margin-top:10px;padding:12px 16px;font-size:10px}.stage{inset:34% 0 11%}.preview{width:55vw;top:39%}.loading{left:50%;top:70%}.pager{left:7%;bottom:6%;gap:8px}.count{font-size:10px}.tutorial{left:7%;bottom:2%;max-width:160px;font-size:9px}.wheel{transform:scale(.82);transform-origin:right bottom}.status{top:75px;right:22px;font-size:9px}}
+</style></head>
+<body><div class="app">
+<header><div class="logo"><div class="emblem">L</div><div><b>LAGON</b><small>ISLAND KITCHEN</small></div></div><span class="demo">3D CAROUSEL · DEMO</span></header>
+<div class="status" id="status">5 ORIGINAL GLB MODELS</div>
+<section class="information"><div class="overline" id="category">01 / ISLAND STARTERS</div><h1 id="dishName">Gâteau<br><em>Piment</em></h1><div class="desc" id="desc">Split-pea fritters with fresh herbs and a chilli kick.</div><div class="portion" id="portion">6 pcs · Starter</div><div class="price" id="price">Rs 525</div><button class="add" id="add">+ Add to order</button></section>
+<div class="stage" id="stage"><div class="preview" id="preview"><img src="../G%C3%A2teau%20Piment.webp" id="poster" alt="Dish preview"/></div><div class="loading" id="loading">Loading 3D dishes…</div></div>
+<div class="pager"><button class="nav" id="prev" aria-label="Previous dish">‹</button><span class="count" id="count">01 — 05</span><button class="nav" id="next" aria-label="Next dish">›</button></div>
+<div class="tutorial">SWIPE TO SWITCH · DRAG TO ROTATE · PINCH TO ZOOM</div>
+<div class="wheel" id="wheel"><div class="orbit"></div><div class="hub">CHOOSE<br>DISH</div></div>
+<div class="notification" id="notification" role="status"></div>
+</div>
+<script type="module">
+const dishes=[
+{name:"Gâteau Piment",cat:"ISLAND STARTERS",desc:"Split-pea fritters with fresh herbs and a chilli kick.",portion:"6 pcs · Starter",price:525,model:"Gâteau Piment.glb",img:"Gâteau Piment.webp"},
+{name:"Seafood Gratin",cat:"ISLAND STARTERS",desc:"Tender seafood baked under a golden, creamy crust.",portion:"250g · Starter",price:650,model:"Seafood Gratin.glb",img:"Seafood Gratin.webp"},
+{name:"Bol Renversé",cat:"ISLAND MAINS",desc:"Fragrant rice, chicken and vegetables crowned with an egg.",portion:"450g · Main",price:625,model:"Bol Renversé.glb",img:"Bol Renversé.webp"},
+{name:"Poudine Maïs",cat:"ISLAND DESSERTS",desc:"Soft cornmeal pudding with coconut and vanilla.",portion:"180g · Dessert",price:510,model:"Poudine Maïs.glb",img:"Poudine Maïs.webp"},
+{name:"Alouda Milkshake",cat:"ISLAND DRINKS",desc:"Chilled milk with basil seeds and a vanilla finish.",portion:"300ml · Drink",price:535,model:"Alouda Milkshake.glb",img:"Alouda Milkshake.webp"}
+];
+const el=id=>document.getElementById(id),url=name=>"../"+encodeURIComponent(name);
+let selected=0,order=0,holders=[],userZoom=1,dragging=false,down=0,lastX=0,turn=0;
+const buttons=[];
+function show(i){selected=(i+5)%5;const d=dishes[selected],words=d.name.split(" ");el("dishName").innerHTML=words[0]+"<br><em>"+words.slice(1).join(" ")+"</em>";el("category").textContent=String(selected+1).padStart(2,"0")+" / "+d.cat;el("desc").textContent=d.desc;el("portion").textContent=d.portion;el("price").textContent="Rs "+d.price;el("count").textContent=String(selected+1).padStart(2,"0")+" — 05";el("poster").src=url(d.img);buttons.forEach((b,j)=>b.classList.toggle("active",j===selected));}
+function change(d){show(selected+d)}
+el("prev").onclick=()=>change(-1);el("next").onclick=()=>change(1);
+el("add").onclick=()=>{order++;el("notification").textContent=dishes[selected].name+" added · "+order+" in demo cart";el("notification").style.opacity="1";setTimeout(()=>el("notification").style.opacity="0",2000)};
+dishes.forEach((d,i)=>{const deg=116+i*32,angle=deg*Math.PI/180,cx=218,cy=145,r=108;const b=document.createElement("button");b.className="dish-button";b.style.left=(cx+r*Math.cos(angle)-32)+"px";b.style.top=(cy-r*Math.sin(angle)-32)+"px";b.setAttribute("aria-label","Select "+d.name);b.title=d.name;const img=new Image();img.src=url(d.img);img.alt=d.name;b.appendChild(img);b.onclick=()=>show(i);el("wheel").appendChild(b);buttons.push(b)});show(0);
+try{
+const THREE=await import("https://esm.sh/three@0.164.1");
+const mod=await import("https://esm.sh/three@0.164.1/examples/jsm/loaders/GLTFLoader.js");const GLTFLoader=mod.GLTFLoader;
+const stage=el("stage"),scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x10373e,.018);
+const camera=new THREE.PerspectiveCamera(46,1,.05,100);camera.position.set(0,2.1,10.5);camera.lookAt(0,0,0);
+const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.6));renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.7;stage.prepend(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xf3ffff,0x2b5e64,3.1));const light=new THREE.DirectionalLight(0xffe3b8,4);light.position.set(-3,9,7);scene.add(light);const fill=new THREE.DirectionalLight(0x83e8fa,2.5);fill.position.set(4,3,-4);scene.add(fill);
+const loader=new GLTFLoader();const texLoader=new THREE.TextureLoader();
+let loaded=0;
+dishes.forEach((d,i)=>{
+ const holder=new THREE.Group();scene.add(holder);holders.push(holder);
+ const plate=new THREE.Mesh(new THREE.CylinderGeometry(.95,1.05,.1,42),new THREE.MeshStandardMaterial({color:0x254c4c,metalness:.4,roughness:.5}));plate.position.y=-.76;holder.add(plate);
+ const tex=texLoader.load(url(d.img));tex.colorSpace=THREE.SRGBColorSpace;
+ const fallback=new THREE.Mesh(new THREE.PlaneGeometry(1.7,1.4),new THREE.MeshBasicMaterial({map:tex,transparent:true,side:THREE.DoubleSide}));fallback.position.y=.2;holder.add(fallback);
+ loader.load(url(d.model),gltf=>{
+ const mdl=gltf.scene;const bounds=new THREE.Box3().setFromObject(mdl),size=bounds.getSize(new THREE.Vector3()),center=bounds.getCenter(new THREE.Vector3()),factor=2.12/Math.max(size.x,size.y,size.z,.00001);mdl.scale.setScalar(factor);mdl.position.copy(center.multiplyScalar(-factor));mdl.position.y+=.18;holder.remove(fallback);holder.add(mdl);loaded++;el("status").textContent=loaded+"/5 3D MODELS LOADED";if(i===0)stage.classList.add("ready");
+ },undefined,error=>{console.warn("Model load failed",d.model,error);if(i===0){el("loading").textContent="3D did not load; photo previews are still available.";el("status").textContent="3D model connection error";}});
+});
+const resize=()=>{const w=Math.max(1,stage.clientWidth),h=Math.max(1,stage.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)};window.addEventListener("resize",resize);resize();
+let old=performance.now();function render(now){requestAnimationFrame(render);const dt=Math.min((now-old)/1000,.06);old=now;const mobile=window.innerWidth<650;holders.forEach((g,i)=>{let d=i-selected;if(d>2)d-=5;if(d< -2)d+=5;const dest=new THREE.Vector3(d*(mobile?1.34:2.13)+(mobile?.10:1.18),d===0?-.18:-.25-Math.abs(d)*.10,d===0?1.4:Math.abs(d)===1?-.9:-2.2);g.position.lerp(dest,Math.min(1,dt*5));const s=(d===0?(mobile?1.16:1.33):Math.abs(d)===1?.74:.43)*userZoom;g.scale.lerp(new THREE.Vector3(s,s,s),Math.min(1,dt*5));if(i!==selected)g.rotation.y+=dt*.12});renderer.render(scene,camera)}
+requestAnimationFrame(render);
+stage.addEventListener("pointerdown",e=>{dragging=true;down=lastX=e.clientX;turn=0;stage.classList.add("dragging");try{stage.setPointerCapture(e.pointerId)}catch{}});
+stage.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-lastX;lastX=e.clientX;turn+=dx;const g=holders[selected];if(g)g.rotation.y+=dx*.009});
+stage.addEventListener("pointerup",e=>{if(!dragging)return;dragging=false;stage.classList.remove("dragging");const dx=e.clientX-down;if(Math.abs(dx)>95)change(dx<0?1:-1)});
+stage.addEventListener("pointercancel",()=>{dragging=false;stage.classList.remove("dragging")});
+stage.addEventListener("wheel",e=>{e.preventDefault();userZoom=Math.max(.72,Math.min(1.5,userZoom+(e.deltaY>0?-.07:.07)))},{passive:false});
+let pinch=0;stage.addEventListener("touchmove",e=>{if(e.touches.length===2){const [a,b]=e.touches,dist=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(pinch)userZoom=Math.max(.72,Math.min(1.5,userZoom+(dist-pinch)*.005));pinch=dist;}else pinch=0},{passive:false});stage.addEventListener("touchend",()=>pinch=0);
+}catch(err){console.error("3D engine",err);el("loading").textContent="3D engine could not start on this device. Use Chrome and try again.";el("status").textContent="3D ENGINE ERROR";}
+</script></body></html>
