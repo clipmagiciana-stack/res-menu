@@ -1,84 +1,123 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/><meta name="theme-color" content="#092e34"/><title>Lagon Island Kitchen · 5D 3D Menu</title>
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#082a30"/>
+<title>Lagon Island Kitchen — Real 3D Dish Carousel</title>
+<script type="module" src="../model-viewer-FXu0v758.js"></script>
 <style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#07272c;color:#fdf8ec;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Arial,sans-serif}
-:root{--gold:#e4c489;--ink:#0a3035;--muted:#a9c3c3}
-.app{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 62% 48%,#225b5b 0%,#0a343b 46%,#051c26 100%)}
-.app:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#ffffff03,transparent 60%),repeating-linear-gradient(150deg,#ffffff06 0 1px,transparent 1px 76px)}
-header{position:relative;z-index:8;display:flex;align-items:center;justify-content:space-between;padding:26px min(5vw,70px);gap:12px}
-.logo{display:flex;gap:11px;align-items:center}.logo .emblem{width:46px;height:46px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:29px}
-.logo b{display:block;letter-spacing:.25em;font-size:15px}.logo small{display:block;letter-spacing:.2em;color:#aac6c1;font-size:9px;margin-top:3px}.demo{border:1px solid #789992;color:#bdd6cf;border-radius:30px;padding:9px 13px;letter-spacing:.12em;font-size:10px}
-.information{position:absolute;left:6%;top:25%;max-width:335px;z-index:6;pointer-events:none}.overline{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.27em}
-h1{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(46px,5vw,80px);line-height:1.02;letter-spacing:-.05em;margin:18px 0}h1 em{font-weight:400;color:var(--gold);font-style:italic}
-.desc{color:#c3d8d5;font-size:14px;line-height:1.65;max-width:290px;min-height:68px}.portion{color:#bad4d2;font-size:12px;letter-spacing:.08em;margin-top:12px}.price{font-family:Georgia,serif;color:var(--gold);font-size:34px;margin-top:9px}
-.add{border:0;background:var(--gold);color:#193438;border-radius:50px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;padding:14px 22px;margin-top:18px;pointer-events:auto;cursor:pointer}
-.stage{position:absolute;inset:80px 0 70px;z-index:2;touch-action:none;cursor:grab}.stage.dragging{cursor:grabbing}.stage canvas{display:block;width:100%;height:100%}
-.preview{position:absolute;left:50%;top:35%;transform:translate(-50%,-50%);width:min(36vw,330px);opacity:.48;pointer-events:none}.preview img{width:100%;border-radius:100%;mask-image:radial-gradient(circle,#000 36%,transparent 72%)}.stage.ready .preview{display:none}
-.loading{position:absolute;left:57%;top:72%;transform:translateX(-50%);color:#d9e9e6;font-size:11px;max-width:230px;line-height:1.5;text-align:center}.stage.ready .loading{display:none}
-.pager{position:absolute;z-index:8;left:6%;bottom:10%;display:flex;gap:15px;align-items:center}.nav{background:#ffffff12;color:#fbf3e6;width:47px;height:47px;border:1px solid #adbbbca8;border-radius:100px;font-size:28px;cursor:pointer}.count{color:#cae0de;letter-spacing:.2em;font-size:12px}
-.tutorial{position:absolute;bottom:4%;left:6%;z-index:8;color:#a1c0bc;font-size:10px;letter-spacing:.08em}
-.wheel{position:absolute;right:0;bottom:0;width:250px;height:290px;z-index:9;overflow:hidden;pointer-events:none}
-.orbit{position:absolute;left:106px;top:31px;width:220px;height:220px;border:1px solid #e4c48966;border-radius:50%;box-shadow:0 0 38px #d9bb8720 inset}
-.hub{position:absolute;left:169px;top:115px;border-radius:50%;width:92px;height:92px;background:linear-gradient(145deg,#f0d7a5,#b18e59);color:#14383b;display:grid;place-items:center;text-align:center;line-height:1.3;font-size:10px;letter-spacing:.14em;font-weight:900}
-.dish-button{position:absolute;width:64px;height:64px;border-radius:50%;overflow:hidden;border:2px solid #bed3c9;background:#1d4a4c;padding:0;pointer-events:auto;cursor:pointer;box-shadow:0 10px 22px #0007;transition:transform .2s,border-color .2s}.dish-button img{width:100%;height:100%;object-fit:cover}.dish-button.active{border:3px solid var(--gold);transform:scale(1.15);box-shadow:0 0 0 5px #e4c4892a,0 12px 25px #0008}
-.cart{position:relative;z-index:8;font-size:12px;color:var(--gold);margin-left:auto}.notification{position:absolute;z-index:15;bottom:90px;left:50%;transform:translateX(-50%);background:var(--gold);color:#102f33;padding:12px 18px;border-radius:30px;opacity:0;transition:opacity .2s;font-size:12px;font-weight:700;pointer-events:none;white-space:nowrap}
-.status{position:absolute;right:5%;top:100px;color:#bfd3cf;font-size:11px;z-index:8}
-@media(min-width:900px){.app{min-height:720px;height:100svh}.stage{left:14%;inset:80px 0 60px 13%}}
-@media(max-width:650px){header{padding:18px 20px}.logo .emblem{width:39px;height:39px;font-size:24px}.logo b{font-size:12px}.logo small{font-size:7px}.demo{font-size:9px;padding:8px}.information{top:14%;left:7%;max-width:85%}h1{font-size:clamp(42px,12vw,59px);margin:10px 0}.desc{font-size:12px;max-width:285px;line-height:1.45;min-height:0}.portion{margin-top:8px}.price{font-size:27px;margin-top:5px}.add{margin-top:10px;padding:12px 16px;font-size:10px}.stage{inset:34% 0 11%}.preview{width:55vw;top:39%}.loading{left:50%;top:70%}.pager{left:7%;bottom:6%;gap:8px}.count{font-size:10px}.tutorial{left:7%;bottom:2%;max-width:160px;font-size:9px}.wheel{transform:scale(.82);transform-origin:right bottom}.status{top:75px;right:22px;font-size:9px}}
+*{box-sizing:border-box}html,body{padding:0;margin:0;background:#061e26;color:#f8f6eb;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+:root{--gold:#e9c68a;--soft:#aac8c7;--dark:#082e34}
+main{min-height:100svh;position:relative;overflow:hidden;background:radial-gradient(ellipse at 59% 48%,#286666 0%,#0c3b43 46%,#061c25 100%)}
+main:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(138deg,transparent 0px 100px,#ffffff04 101px 102px)}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:23px min(5vw,65px);position:relative;z-index:20}
+.logo{display:flex;align-items:center;gap:10px}.emblem{border:1px solid var(--gold);color:var(--gold);border-radius:50%;width:43px;height:43px;display:grid;place-items:center;font:27px Georgia,serif}
+.logo strong{display:block;font-size:14px;letter-spacing:.22em}.logo small{display:block;font-size:8px;letter-spacing:.2em;color:#b7d0cb;margin-top:3px}
+.chip{font-size:10px;letter-spacing:.12em;color:#c9dad5;border:1px solid #7da5a1;border-radius:99px;padding:9px 14px}
+.info{z-index:8;position:absolute;top:24%;left:6%;width:33%;max-width:345px;pointer-events:none}
+.eyebrow{font-size:11px;letter-spacing:.22em;color:var(--gold);font-weight:800}
+h1{font:normal clamp(43px,5vw,78px)/1.04 Georgia,serif;letter-spacing:-.048em;margin:18px 0}
+h1 em{color:var(--gold);font-style:italic}
+.description{font-size:14px;line-height:1.65;color:#c6d9d7;max-width:290px;min-height:72px}
+.portion{font-size:12px;letter-spacing:.06em;color:#bcd1cc;margin-top:14px}
+.price{font:34px Georgia,serif;color:var(--gold);margin:10px 0}
+.add{pointer-events:auto;cursor:pointer;background:var(--gold);color:#19373a;border:0;border-radius:99px;padding:14px 21px;font-size:11px;letter-spacing:.11em;font-weight:900;text-transform:uppercase}
+.stage{position:absolute;inset:92px 0 90px;z-index:3;pointer-events:none}
+.orbit-line{position:absolute;width:56vw;max-width:730px;height:130px;left:59%;top:77%;transform:translate(-50%,-50%);border:1px solid #e7c88d40;border-radius:50%;box-shadow:0 0 80px #e7c88d14;pointer-events:none}
+.model-card{position:absolute;top:49%;left:59%;height:min(65vh,510px);width:min(39vw,480px);max-height:530px;max-width:480px;transform:translate(-50%,-50%);transition:transform .55s cubic-bezier(.25,.8,.25,1),opacity .55s,filter .55s;pointer-events:auto;cursor:pointer}
+.model-card model-viewer{display:block;width:100%;height:100%;background:transparent;--poster-color:transparent;--progress-bar-color:#e9c68a;outline:none}
+.model-card.side model-viewer{pointer-events:none}
+.model-card.selected{cursor:grab}.model-card.selected model-viewer{pointer-events:auto}
+.model-card:not(.selected){filter:saturate(.8);opacity:.73}
+.model-card.back{opacity:.42;filter:saturate(.65)}
+.model-card .load-state{position:absolute;top:82%;left:50%;transform:translateX(-50%);font-size:10px;color:#d3e2db;white-space:nowrap;pointer-events:none}
+.model-card.loaded .load-state{display:none}
+.model-card.failed .load-state{color:#ffc7a0}
+.model-card .name-tag{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:#06262cba;border:1px solid #bdcbbd55;border-radius:30px;color:#f7e9d2;padding:6px 11px;font-size:10px;white-space:nowrap;pointer-events:none}
+.model-card.selected .name-tag{display:none}
+.model-card:not(.selected) .name-tag{display:block}
+.navigation{position:absolute;left:6%;bottom:10%;z-index:15;display:flex;align-items:center;gap:12px}
+.nav{width:45px;height:45px;border:1px solid #9cb9b6;background:#ffffff13;border-radius:50%;color:white;font-size:26px;cursor:pointer}
+.counter{font-size:12px;letter-spacing:.15em;color:#c6d8d7;padding:0 10px}
+.tip{position:absolute;left:6%;bottom:4%;z-index:15;color:#b2ccc8;font-size:10px;letter-spacing:.1em}
+.wheel{width:310px;height:320px;position:absolute;right:0;bottom:0;z-index:22;pointer-events:none;overflow:hidden}
+.ring{width:290px;height:290px;left:114px;top:16px;position:absolute;border-radius:50%;border:1px solid #e9c68a82;background:radial-gradient(circle at 40% 50%,#e9c68a16,transparent 58%)}
+.hub{left:211px;top:122px;width:94px;height:94px;position:absolute;background:linear-gradient(140deg,#e9d29e,#b28d50);box-shadow:0 0 24px #f2c17944;border-radius:50%;display:grid;place-items:center;text-align:center;color:#17373a;font-size:10px;font-weight:900;letter-spacing:.12em;line-height:1.4}
+.dish-thumb{position:absolute;border:2px solid #d5d8ca;width:59px;height:59px;border-radius:50%;overflow:hidden;padding:0;background:#204e50;pointer-events:auto;cursor:pointer;box-shadow:0 8px 19px #0009;transition:transform .2s,border-color .2s}
+.dish-thumb img{height:100%;width:100%;object-fit:cover}
+.dish-thumb.active{transform:scale(1.17);border:3px solid var(--gold);box-shadow:0 0 0 4px #e9c68a38,0 8px 21px #0008}
+.status{position:absolute;right:5%;top:90px;z-index:18;color:#b9d0cb;font-size:11px;letter-spacing:.06em}
+.toast{position:absolute;bottom:93px;left:50%;transform:translateX(-50%);z-index:30;padding:12px 17px;border-radius:30px;color:#193b3e;background:var(--gold);font-size:12px;font-weight:800;opacity:0;pointer-events:none;transition:opacity .2s;white-space:nowrap}
+@media(max-width:700px){
+header{padding:17px 20px}.logo .emblem{width:37px;height:37px;font-size:24px}.logo strong{font-size:12px}.logo small{font-size:7px}.chip{font-size:9px;padding:7px 9px}
+.info{top:13%;left:7%;width:86%;max-width:350px}
+h1{font-size:clamp(43px,11vw,56px);margin:10px 0}.description{max-width:280px;font-size:12px;line-height:1.45;min-height:0}.portion{margin-top:7px}.price{font-size:26px;margin:6px 0}.add{padding:12px 15px;font-size:10px}
+.stage{inset:35% 0 8%;}.orbit-line{left:50%;width:100vw;top:74%}
+.model-card{left:50%;top:48%;height:min(52vh,380px);width:min(65vw,320px)}
+.navigation{left:7%;bottom:6%;gap:8px}.counter{font-size:10px;padding:0 5px}
+.tip{bottom:2%;left:7%;font-size:8px;width:190px}
+.wheel{transform:scale(.73);transform-origin:right bottom}
+.status{top:66px;right:22px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.model-card,.dish-thumb{transition:none}}
 </style></head>
-<body><div class="app">
-<header><div class="logo"><div class="emblem">L</div><div><b>LAGON</b><small>ISLAND KITCHEN</small></div></div><span class="demo">3D CAROUSEL · DEMO</span></header>
-<div class="status" id="status">5 ORIGINAL GLB MODELS</div>
-<section class="information"><div class="overline" id="category">01 / ISLAND STARTERS</div><h1 id="dishName">Gâteau<br><em>Piment</em></h1><div class="desc" id="desc">Split-pea fritters with fresh herbs and a chilli kick.</div><div class="portion" id="portion">6 pcs · Starter</div><div class="price" id="price">Rs 525</div><button class="add" id="add">+ Add to order</button></section>
-<div class="stage" id="stage"><div class="preview" id="preview"><img src="../G%C3%A2teau%20Piment.webp" id="poster" alt="Dish preview"/></div><div class="loading" id="loading">Loading 3D dishes…</div></div>
-<div class="pager"><button class="nav" id="prev" aria-label="Previous dish">‹</button><span class="count" id="count">01 — 05</span><button class="nav" id="next" aria-label="Next dish">›</button></div>
-<div class="tutorial">SWIPE TO SWITCH · DRAG TO ROTATE · PINCH TO ZOOM</div>
-<div class="wheel" id="wheel"><div class="orbit"></div><div class="hub">CHOOSE<br>DISH</div></div>
-<div class="notification" id="notification" role="status"></div>
-</div>
-<script type="module">
+<body>
+<main><header><div class="logo"><div class="emblem">L</div><div><strong>LAGON</strong><small>ISLAND KITCHEN</small></div></div><span class="chip">REAL 3D FOOD MENU</span></header>
+<div class="status" id="status">LOADING 5 ORIGINAL 3D MODELS</div>
+<div class="info"><div class="eyebrow" id="eyebrow">01 / ISLAND STARTERS</div><h1 id="heading">Gâteau<br><em>Piment</em></h1><div class="description" id="description">Split-pea fritters with fresh herbs and a chilli kick.</div><div class="portion" id="portion">6 pcs · Starter</div><div class="price" id="price">Rs 525</div><button id="add" class="add">+ Add to order</button></div>
+<div class="stage" id="stage"><div class="orbit-line"></div></div>
+<div class="navigation"><button id="previous" class="nav" aria-label="Previous dish">‹</button><span class="counter" id="counter">01 — 05</span><button id="next" class="nav" aria-label="Next dish">›</button></div>
+<div class="tip">SWIPE TO CHANGE DISHES · DRAG TO ROTATE · PINCH TO ZOOM</div>
+<div class="wheel" id="wheel"><div class="ring"></div><div class="hub">CHOOSE<br>DISH</div></div>
+<div class="toast" id="toast"></div>
+</main>
+<script>
 const dishes=[
-{name:"Gâteau Piment",cat:"ISLAND STARTERS",desc:"Split-pea fritters with fresh herbs and a chilli kick.",portion:"6 pcs · Starter",price:525,model:"Gâteau Piment.glb",img:"Gâteau Piment.webp"},
-{name:"Seafood Gratin",cat:"ISLAND STARTERS",desc:"Tender seafood baked under a golden, creamy crust.",portion:"250g · Starter",price:650,model:"Seafood Gratin.glb",img:"Seafood Gratin.webp"},
-{name:"Bol Renversé",cat:"ISLAND MAINS",desc:"Fragrant rice, chicken and vegetables crowned with an egg.",portion:"450g · Main",price:625,model:"Bol Renversé.glb",img:"Bol Renversé.webp"},
-{name:"Poudine Maïs",cat:"ISLAND DESSERTS",desc:"Soft cornmeal pudding with coconut and vanilla.",portion:"180g · Dessert",price:510,model:"Poudine Maïs.glb",img:"Poudine Maïs.webp"},
-{name:"Alouda Milkshake",cat:"ISLAND DRINKS",desc:"Chilled milk with basil seeds and a vanilla finish.",portion:"300ml · Drink",price:535,model:"Alouda Milkshake.glb",img:"Alouda Milkshake.webp"}
+{n:"Gâteau Piment",cat:"ISLAND STARTERS",desc:"Split-pea fritters with fresh herbs and a chilli kick.",portion:"6 pcs · Starter",p:525,model:"Gâteau Piment.glb",photo:"Gâteau Piment.webp"},
+{n:"Seafood Gratin",cat:"ISLAND STARTERS",desc:"Tender seafood baked under a golden, creamy crust.",portion:"250g · Starter",p:650,model:"Seafood Gratin.glb",photo:"Seafood Gratin.webp"},
+{n:"Bol Renversé",cat:"ISLAND MAINS",desc:"Fragrant rice, chicken and vegetables crowned with an egg.",portion:"450g · Main",p:625,model:"Bol Renversé.glb",photo:"Bol Renversé.webp"},
+{n:"Poudine Maïs",cat:"ISLAND DESSERTS",desc:"Soft cornmeal pudding with coconut and vanilla.",portion:"180g · Dessert",p:510,model:"Poudine Maïs.glb",photo:"Poudine Maïs.webp"},
+{n:"Alouda Milkshake",cat:"ISLAND DRINKS",desc:"Chilled milk with basil seeds and a vanilla finish.",portion:"300ml · Drink",p:535,model:"Alouda Milkshake.glb",photo:"Alouda Milkshake.webp"}
 ];
-const el=id=>document.getElementById(id),url=name=>"../"+encodeURIComponent(name);
-let selected=0,order=0,holders=[],userZoom=1,dragging=false,down=0,lastX=0,turn=0;
-const buttons=[];
-function show(i){selected=(i+5)%5;const d=dishes[selected],words=d.name.split(" ");el("dishName").innerHTML=words[0]+"<br><em>"+words.slice(1).join(" ")+"</em>";el("category").textContent=String(selected+1).padStart(2,"0")+" / "+d.cat;el("desc").textContent=d.desc;el("portion").textContent=d.portion;el("price").textContent="Rs "+d.price;el("count").textContent=String(selected+1).padStart(2,"0")+" — 05";el("poster").src=url(d.img);buttons.forEach((b,j)=>b.classList.toggle("active",j===selected));}
-function change(d){show(selected+d)}
-el("prev").onclick=()=>change(-1);el("next").onclick=()=>change(1);
-el("add").onclick=()=>{order++;el("notification").textContent=dishes[selected].name+" added · "+order+" in demo cart";el("notification").style.opacity="1";setTimeout(()=>el("notification").style.opacity="0",2000)};
-dishes.forEach((d,i)=>{const deg=116+i*32,angle=deg*Math.PI/180,cx=218,cy=145,r=108;const b=document.createElement("button");b.className="dish-button";b.style.left=(cx+r*Math.cos(angle)-32)+"px";b.style.top=(cy-r*Math.sin(angle)-32)+"px";b.setAttribute("aria-label","Select "+d.name);b.title=d.name;const img=new Image();img.src=url(d.img);img.alt=d.name;b.appendChild(img);b.onclick=()=>show(i);el("wheel").appendChild(b);buttons.push(b)});show(0);
-try{
-const THREE=await import("https://esm.sh/three@0.164.1");
-const mod=await import("https://esm.sh/three@0.164.1/examples/jsm/loaders/GLTFLoader.js");const GLTFLoader=mod.GLTFLoader;
-const stage=el("stage"),scene=new THREE.Scene();scene.fog=new THREE.FogExp2(0x10373e,.018);
-const camera=new THREE.PerspectiveCamera(46,1,.05,100);camera.position.set(0,2.1,10.5);camera.lookAt(0,0,0);
-const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"high-performance"});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.6));renderer.setClearColor(0x000000,0);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.7;stage.prepend(renderer.domElement);
-scene.add(new THREE.HemisphereLight(0xf3ffff,0x2b5e64,3.1));const light=new THREE.DirectionalLight(0xffe3b8,4);light.position.set(-3,9,7);scene.add(light);const fill=new THREE.DirectionalLight(0x83e8fa,2.5);fill.position.set(4,3,-4);scene.add(fill);
-const loader=new GLTFLoader();const texLoader=new THREE.TextureLoader();
-let loaded=0;
+const $=id=>document.getElementById(id),root="./../",asset=name=>root+encodeURIComponent(name);
+let current=0,count=0,ready=0;
+const cards=[],thumbs=[];
 dishes.forEach((d,i)=>{
- const holder=new THREE.Group();scene.add(holder);holders.push(holder);
- const plate=new THREE.Mesh(new THREE.CylinderGeometry(.95,1.05,.1,42),new THREE.MeshStandardMaterial({color:0x254c4c,metalness:.4,roughness:.5}));plate.position.y=-.76;holder.add(plate);
- const tex=texLoader.load(url(d.img));tex.colorSpace=THREE.SRGBColorSpace;
- const fallback=new THREE.Mesh(new THREE.PlaneGeometry(1.7,1.4),new THREE.MeshBasicMaterial({map:tex,transparent:true,side:THREE.DoubleSide}));fallback.position.y=.2;holder.add(fallback);
- loader.load(url(d.model),gltf=>{
- const mdl=gltf.scene;const bounds=new THREE.Box3().setFromObject(mdl),size=bounds.getSize(new THREE.Vector3()),center=bounds.getCenter(new THREE.Vector3()),factor=2.12/Math.max(size.x,size.y,size.z,.00001);mdl.scale.setScalar(factor);mdl.position.copy(center.multiplyScalar(-factor));mdl.position.y+=.18;holder.remove(fallback);holder.add(mdl);loaded++;el("status").textContent=loaded+"/5 3D MODELS LOADED";if(i===0)stage.classList.add("ready");
- },undefined,error=>{console.warn("Model load failed",d.model,error);if(i===0){el("loading").textContent="3D did not load; photo previews are still available.";el("status").textContent="3D model connection error";}});
+ const holder=document.createElement("div");holder.className="model-card";holder.setAttribute("aria-label","3D model of "+d.n);
+ const viewer=document.createElement("model-viewer");viewer.setAttribute("src",asset(d.model));viewer.setAttribute("alt","Interactive 3D model of "+d.n);viewer.setAttribute("camera-controls","");viewer.setAttribute("interaction-prompt","none");viewer.setAttribute("environment-image","neutral");viewer.setAttribute("shadow-intensity","0.5");viewer.setAttribute("exposure","1.55");viewer.setAttribute("loading","eager");viewer.setAttribute("reveal","auto");viewer.setAttribute("camera-orbit","0deg 70deg 110%");viewer.setAttribute("field-of-view","30deg");
+ const loader=document.createElement("div");loader.className="load-state";loader.textContent="Loading 3D…";
+ const tag=document.createElement("span");tag.className="name-tag";tag.textContent=d.n;
+ holder.append(viewer,loader,tag);$("stage").append(holder);cards.push(holder);
+ viewer.addEventListener("load",()=>{if(!holder.classList.contains("loaded")){holder.classList.add("loaded");ready++;$("status").textContent=ready+"/5 3D MODELS LOADED";}});
+ viewer.addEventListener("error",()=>{holder.classList.add("failed");loader.textContent="3D model failed to load";$("status").textContent="3D model error · retry in Chrome";});
+ holder.addEventListener("click",()=>{if(i!==current)show(i)});
+ const angle=(116+i*31)*Math.PI/180,cx=258,cy=165,r=139;
+ const b=document.createElement("button");b.className="dish-thumb";b.style.left=(cx+r*Math.cos(angle)-29.5)+"px";b.style.top=(cy-r*Math.sin(angle)-29.5)+"px";b.title=d.n;b.setAttribute("aria-label","Select "+d.n);
+ const photo=new Image();photo.src=asset(d.photo);photo.alt=d.n;b.append(photo);b.addEventListener("click",()=>show(i));$("wheel").append(b);thumbs.push(b);
 });
-const resize=()=>{const w=Math.max(1,stage.clientWidth),h=Math.max(1,stage.clientHeight);camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h)};window.addEventListener("resize",resize);resize();
-let old=performance.now();function render(now){requestAnimationFrame(render);const dt=Math.min((now-old)/1000,.06);old=now;const mobile=window.innerWidth<650;holders.forEach((g,i)=>{let d=i-selected;if(d>2)d-=5;if(d< -2)d+=5;const dest=new THREE.Vector3(d*(mobile?1.34:2.13)+(mobile?.10:1.18),d===0?-.18:-.25-Math.abs(d)*.10,d===0?1.4:Math.abs(d)===1?-.9:-2.2);g.position.lerp(dest,Math.min(1,dt*5));const s=(d===0?(mobile?1.16:1.33):Math.abs(d)===1?.74:.43)*userZoom;g.scale.lerp(new THREE.Vector3(s,s,s),Math.min(1,dt*5));if(i!==selected)g.rotation.y+=dt*.12});renderer.render(scene,camera)}
-requestAnimationFrame(render);
-stage.addEventListener("pointerdown",e=>{dragging=true;down=lastX=e.clientX;turn=0;stage.classList.add("dragging");try{stage.setPointerCapture(e.pointerId)}catch{}});
-stage.addEventListener("pointermove",e=>{if(!dragging)return;const dx=e.clientX-lastX;lastX=e.clientX;turn+=dx;const g=holders[selected];if(g)g.rotation.y+=dx*.009});
-stage.addEventListener("pointerup",e=>{if(!dragging)return;dragging=false;stage.classList.remove("dragging");const dx=e.clientX-down;if(Math.abs(dx)>95)change(dx<0?1:-1)});
-stage.addEventListener("pointercancel",()=>{dragging=false;stage.classList.remove("dragging")});
-stage.addEventListener("wheel",e=>{e.preventDefault();userZoom=Math.max(.72,Math.min(1.5,userZoom+(e.deltaY>0?-.07:.07)))},{passive:false});
-let pinch=0;stage.addEventListener("touchmove",e=>{if(e.touches.length===2){const [a,b]=e.touches,dist=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);if(pinch)userZoom=Math.max(.72,Math.min(1.5,userZoom+(dist-pinch)*.005));pinch=dist;}else pinch=0},{passive:false});stage.addEventListener("touchend",()=>pinch=0);
-}catch(err){console.error("3D engine",err);el("loading").textContent="3D engine could not start on this device. Use Chrome and try again.";el("status").textContent="3D ENGINE ERROR";}
+function show(i){
+ current=(i+5)%5;const d=dishes[current],names=d.n.split(" ");
+ $("heading").innerHTML=names[0]+"<br><em>"+names.slice(1).join(" ")+"</em>";
+ $("eyebrow").textContent=String(current+1).padStart(2,"0")+" / "+d.cat;
+ $("description").textContent=d.desc;$("portion").textContent=d.portion;$("price").textContent="Rs "+d.p;$("counter").textContent=String(current+1).padStart(2,"0")+" — 05";
+ const mobile=window.innerWidth<=700;
+ cards.forEach((holder,j)=>{let diff=j-current;while(diff>2)diff-=5;while(diff< -2)diff+=5;
+  const dist=Math.abs(diff),dx=diff*(mobile?170:300),dy=dist===0?0:dist===1?35:60,sc=dist===0?1.13:dist===1?.7:.45;
+  holder.style.transform="translate(-50%,-50%) translate3d("+dx+"px,"+dy+"px,0) scale("+sc+")";
+  holder.style.zIndex=String(8-dist);
+  holder.classList.toggle("selected",dist===0);holder.classList.toggle("side",dist!==0);holder.classList.toggle("back",dist===2);
+  const viewer=holder.querySelector("model-viewer");
+  if(dist===0){viewer.setAttribute("auto-rotate","");viewer.setAttribute("camera-controls","");}else{viewer.removeAttribute("auto-rotate");viewer.removeAttribute("camera-controls");}
+ });
+ thumbs.forEach((b,j)=>b.classList.toggle("active",j===current));
+}
+$("previous").addEventListener("click",()=>show(current-1));$("next").addEventListener("click",()=>show(current+1));
+$("add").addEventListener("click",()=>{count++;$("toast").textContent=dishes[current].n+" added · "+count+" in demo cart";$("toast").style.opacity="1";setTimeout(()=>$("toast").style.opacity="0",1900)});
+let startX=null;
+$("stage").addEventListener("pointerdown",e=>{if(e.target.tagName.toLowerCase()==="model-viewer")return;startX=e.clientX});
+$("stage").addEventListener("pointerup",e=>{if(startX===null)return;const delta=e.clientX-startX;if(Math.abs(delta)>75)show(current+(delta<0?1:-1));startX=null});
+window.addEventListener("keydown",e=>{if(e.key==="ArrowRight")show(current+1);if(e.key==="ArrowLeft")show(current-1)});
+window.addEventListener("resize",()=>show(current));
+show(0);
+setTimeout(()=>{if(ready===0)$("status").textContent="If 3D stays blank, open this page in Chrome";},14000);
 </script></body></html>
